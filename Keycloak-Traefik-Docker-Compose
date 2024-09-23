@@ -1,0 +1,76 @@
+services:
+  traefik:
+    image: traefik:v3.1
+    command:
+      - "--api.insecure=true"  # Enables Traefik's dashboard (for testing)
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"         # HTTP entry point
+      - "--entrypoints.websecure.address=:443"  # HTTPS entry point
+      - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"  # Enable Let's Encrypt for SSL
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.myresolver.acme.email=myemail@example.com"  # Email for Let's Encrypt
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    labels:
+      - "traefik.http.middlewares.middleware12.headers.sslforcehost=true"
+      - "traefik.http.middlewares.middleware12.headers.sslhost=my.domain.com"
+    ports:
+      - "80:80"   # HTTP
+      - "443:443" # HTTPS
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"  # For Docker provider
+      - "./letsencrypt:/letsencrypt"  # Persist Let's Encrypt certificates
+    networks:
+      - web
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest  # Pre-built image
+    environment:
+      - KC_DB=postgres
+      - KC_DB_URL=jdbc:postgresql://db:5432/keycloak
+      - KC_DB_USERNAME=keycloak
+      - KC_DB_PASSWORD=CHANGE_THIS_PASSWORD
+      - KC_HOSTNAME=my.domain.com
+      - KEYCLOAK_ADMIN=MyFavUsername
+      - KEYCLOAK_ADMIN_PASSWORD=CHANGE_THIS_PASSWORD
+      - KC_HTTPS_KEY_STORE_FILE=/opt/keycloak/conf/server.keystore
+      - KC_HTTPS_KEY_STORE_PASSWORD=CHANGE_THIS_PASSWORD
+      - KC_HTTPS_PORT=8443
+      #- KC_HTTP_PORT=8080
+      - KC_HTTP_ENABLED=false
+      - KC_HEALTH_ENABLED=true
+      - KC_PROXY_HEADERS=xforwarded
+      - KC_LOG=console
+      - KC_HOSTNAME_STRICT=true
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.my-container.rule=Host(`my.domain.com`)"  # Route for your domain
+      - "traefik.http.routers.my-container.entrypoints=websecure"
+      - "traefik.http.routers.my-container.tls.certresolver=myresolver"  # Use Let's Encrypt for SSL
+      - "traefik.http.services.my-container.loadbalancer.server.port=8080"  # Route to port 8080
+    networks:
+      - web
+    volumes:
+      - ./certs:/opt/keycloak/conf/
+      - ./themes:/opt/keycloak/themes
+    ports:
+      - "8443:8443"
+      #- "8080:8080"
+    depends_on:
+      - db
+    command: ["start-dev"] # Start
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=CHANGE_THIS_PASSWORD
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+     - web
+volumes:
+  db-data:
+networks:
+  web:
+    external: true
