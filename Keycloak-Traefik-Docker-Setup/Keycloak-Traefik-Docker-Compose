@@ -2,7 +2,7 @@ services:
   traefik:
     image: traefik:v3.1
     command:
-      - "--api.insecure=true"  # Enables Traefik's dashboard (for testing)
+      - "--api.insecure=false"  # Enables Traefik's dashboard (for testing)
       - "--providers.docker=true"
       - "--entrypoints.web.address=:80"         # HTTP entry point
       - "--entrypoints.websecure.address=:443"  # HTTPS entry point
@@ -59,7 +59,7 @@ services:
     command: 'start'  # Other options include start-dev and start --optimized see docs
 
   db:
-    image: postgres:13
+    image: postgres
     environment:
       - POSTGRES_DB=keycloak
       - POSTGRES_USER=keycloak
