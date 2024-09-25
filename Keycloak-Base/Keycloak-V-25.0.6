@@ -3,97 +3,113 @@ services:
     image: quay.io/keycloak/keycloak:latest
       environment:
         #CACHE ENVIRONMENT CONFIG
-        - KC_CACHE=ispn (default), local
-        - KC_CACHE_CONFIG_FILE=
-        - KC_CACHE_EMBEDDED_MTLS_ENABLED=true, false (default)
-        - KC_CACHE_EMBEDDED_MTLS_KEY_STORE_FILE=
-        - KC_CACHE_EMBEDDED_MTLS_KEY_STORE_PASSWORD=
-        - KC_CACHE_EMBEDDED_MTLS_TRUST_STORE_FILE=
-        - KC_CACHE_EMBEDDED_MTLS_TRUST_STORE_PASSWORD=
-        - KC_CACHE_METRICS_HISTOGRAMS_ENABLED=true, false (default)
-        - KC_CACHE_REMOTE_HOST=
-        - KC_CACHE_REMOTE_PASSWORD=
-        - KC_CACHE_REMOTE_PORT=11222 (default)
-        - KC_CACHE_REMOTE_TLS_ENABLED=true (default), false
-        - KC_CACHE_REMOTE_USERNAME=
-        - KC_CACHE_STACK=
+        #- KC_CACHE=ispn (default), local
+        #- KC_CACHE_CONFIG_FILE=
+        #- KC_CACHE_EMBEDDED_MTLS_ENABLED=true, false (default)
+        #- KC_CACHE_EMBEDDED_MTLS_KEY_STORE_FILE=
+        #- KC_CACHE_EMBEDDED_MTLS_KEY_STORE_PASSWORD=
+        #- KC_CACHE_EMBEDDED_MTLS_TRUST_STORE_FILE=
+        #- KC_CACHE_EMBEDDED_MTLS_TRUST_STORE_PASSWORD=
+        #- KC_CACHE_METRICS_HISTOGRAMS_ENABLED=true, false (default)
+        #- KC_CACHE_REMOTE_HOST=
+        #- KC_CACHE_REMOTE_PASSWORD=
+        #- KC_CACHE_REMOTE_PORT=11222 (default)
+        #- KC_CACHE_REMOTE_TLS_ENABLED=true (default), false
+        #- KC_CACHE_REMOTE_USERNAME=
+        #- KC_CACHE_STACK=
         #CONFIG ENVIRONMENT CONFIG
-        - KC_CONFIG_KEYSTORE=
-        - KC_CONFIG_KEYSTORE_PASSWORD=
-        - KC_CONFIG_KEYSTORE_TYPE=PKCS12 (default)
+        #- KC_CONFIG_KEYSTORE=
+        #- KC_CONFIG_KEYSTORE_PASSWORD=
+        #- KC_CONFIG_KEYSTORE_TYPE=PKCS12 (default)
         #DATABASE ENVIRONMENT CONFIG
-        - KC_DB=dev-file (default), dev-mem, mariadb, mssql, mysql, oracle, postgres
-        - KC_DB_DRIVER=
-        - KC_DB_PASSWORD=
-        - KC_DB_POOL_INITIAL_SIZE=
-        - KC_DB_POOL_MAX_SIZE=100 (default)
-        - KC_DB_SCHEMA=
-        - KC_DB_URL=
-        - KC_DB_URL_DATABASE=
-        - KC_DB_URL_HOST=
-        - KC_DB_URL_PORT=
-        - KC_DB_URL_PROPERTIES=
-        - KC_DB_USERNAME=
+        #- KC_DB=dev-file (default), dev-mem, mariadb, mssql, mysql, oracle, postgres
+        #- KC_DB_DRIVER=
+        #- KC_DB_PASSWORD=
+        #- KC_DB_POOL_INITIAL_SIZE=
+        #- KC_DB_POOL_MAX_SIZE=100 (default)
+        #- KC_DB_SCHEMA=
+        #- KC_DB_URL=
+        #- KC_DB_URL_DATABASE=
+        #- KC_DB_URL_HOST=
+        #- KC_DB_URL_PORT=
+        #- KC_DB_URL_PROPERTIES=
+        #- KC_DB_USERNAME=
         #TRANSACTION ENVIRONMENT CONFIG
-        - KC_TRANSACTION_XA_ENABLED=true, false (default)
-        - KC_FEATURES=account-api[:v1], account3[:v1], admin-api[:v1], admin-fine-grained-authz[:v1], admin2[:v1], authorization[:v1], ciba[:v1], client-policies[:v1], client-secret-rotation[:v1], client-types[:v1], declarative-ui[:v1], device-flow[:v1], docker[:v1], dpop[:v1], dynamic-scopes[:v1], fips[:v1], hostname[:v1,v2], impersonation[:v1], js-adapter[:v1], kerberos[:v1], login2[:v1], multi-site[:v1], oid4vc-vci[:v1], organization[:v1], par[:v1], passkeys[:v1], persistent-user-sessions[:v1], preview, recovery-codes[:v1], scripts[:v1], step-up-authentication[:v1], token-exchange[:v1], transient-users[:v1], update-email[:v1], web-authn[:v1]
-        - KC_FEATURES_DISABLED=account-api, account3, admin-api, admin-fine-grained-authz, admin2, authorization, ciba, client-policies, client-secret-rotation, client-types, declarative-ui, device-flow, docker, dpop, dynamic-scopes, fips, impersonation, js-adapter, kerberos, login2, multi-site, oid4vc-vci, organization, par, passkeys, persistent-user-sessions, preview, recovery-codes, scripts, step-up-authentication, token-exchange, transient-users, update-email, web-authn
-        - KC_HOSTNAME=
-        - KC_HOSTNAME_ADMIN=
-        - KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true, false (default)
-        - KC_HOSTNAME_DEBUG=true, false (default)
-        - KC_HOSTNAME_STRICT=true (default), false
+        #- KC_TRANSACTION_XA_ENABLED=true, false (default)
+        #- KC_FEATURES=account-api[:v1], account3[:v1], admin-api[:v1], admin-fine-grained-authz[:v1], admin2[:v1], authorization[:v1], ciba[:v1], client-policies[:v1], client-secret-rotation[:v1], client-types[:v1], declarative-ui[:v1], device-flow[:v1], docker[:v1], dpop[:v1], dynamic-scopes[:v1], fips[:v1], hostname[:v1,v2], impersonation[:v1], js-adapter[:v1], kerberos[:v1], login2[:v1], multi-site[:v1], oid4vc-vci[:v1], organization[:v1], par[:v1], passkeys[:v1], persistent-user-sessions[:v1], preview, recovery-codes[:v1], scripts[:v1], step-up-authentication[:v1], token-exchange[:v1], transient-users[:v1], update-email[:v1], web-authn[:v1]
+        #- KC_FEATURES_DISABLED=account-api, account3, admin-api, admin-fine-grained-authz, admin2, authorization, ciba, client-policies, client-secret-rotation, client-types, declarative-ui, device-flow, docker, dpop, dynamic-scopes, fips, impersonation, js-adapter, kerberos, login2, multi-site, oid4vc-vci, organization, par, passkeys, persistent-user-sessions, preview, recovery-codes, scripts, step-up-authentication, token-exchange, transient-users, update-email, web-authn
+        #- KC_HOSTNAME=
+        #- KC_HOSTNAME_ADMIN=
+        #- KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true, false (default)
+        #- KC_HOSTNAME_DEBUG=true, false (default)
+        #- KC_HOSTNAME_STRICT=true (default), false
         #HTTPS ENVIRONMENT CONFIG
-        - KC_HTTP_ENABLED=true, false (default)
-        - KC_HTTP_HOST=0.0.0.0 (default)
-        - KC_HTTP_MAX_QUEUED_REQUESTS=
-        - KC_HTTP_METRICS_HISTOGRAMS_ENABLED=true, false (default)
-        - KC_HTTP_METRICS_SLOS=
-        - KC_HTTP_POOL_MAX_THREADS=
-        - KC_HTTP_PORT=8080 (default)
-        - KC_HTTP_RELATIVE_PATH=/ (default)
-        - KC_HTTPS_CERTIFICATE_FILE=
-        - KC_HTTPS_CERTIFICATE_KEY_FILE=
-        - KC_HTTPS_CIPHER_SUITES=
-        - KC_HTTPS_CLIENT_AUTH=none (default), request, required
-        - KC_HTTPS_KEY_STORE_FILE=
-        - KC_HTTPS_KEY_STORE_PASSWORD=password (default)
-        - KC_HTTPS_KEY_STORE_TYPE=
-        - KC_HTTPS_PORT=8443 (default)
-        - KC_HTTPS_PROTOCOLS=[TLSv1.3,TLSv1.2] (default)
-        - KC_HTTPS_TRUST_STORE_FILE=
-        - KC_HTTPSTRUST_STORE_PASSWORD=
-        - KC_HTTPS_TRUST_STORE_TYPE=
+        #- KC_HTTP_ENABLED=true, false (default)
+        #- KC_HTTP_HOST=0.0.0.0 (default)
+        #- KC_HTTP_MAX_QUEUED_REQUESTS=
+        #- KC_HTTP_METRICS_HISTOGRAMS_ENABLED=true, false (default)
+        #- KC_HTTP_METRICS_SLOS=
+        #- KC_HTTP_POOL_MAX_THREADS=
+        #- KC_HTTP_PORT=8080 (default)
+        #- KC_HTTP_RELATIVE_PATH=/ (default)
+        #- KC_HTTPS_CERTIFICATE_FILE=
+        #- KC_HTTPS_CERTIFICATE_KEY_FILE=
+        #- KC_HTTPS_CIPHER_SUITES=
+        #- KC_HTTPS_CLIENT_AUTH=none (default), request, required
+        #- KC_HTTPS_KEY_STORE_FILE=
+        #- KC_HTTPS_KEY_STORE_PASSWORD=password (default)
+        #- KC_HTTPS_KEY_STORE_TYPE=
+        #- KC_HTTPS_PORT=8443 (default)
+        #- KC_HTTPS_PROTOCOLS=[TLSv1.3,TLSv1.2] (default)
+        #- KC_HTTPS_TRUST_STORE_FILE=
+        #- KC_HTTPSTRUST_STORE_PASSWORD=
+        #- KC_HTTPS_TRUST_STORE_TYPE=
         #HEALTH ENVIRONMENT CONFIG
-        - KC_HEALTH_ENABLED=true, false (default)
+        #- KC_HEALTH_ENABLED=true, false (default)
         #MANAGEMENT ENVIRONMENT CONFIG
-        - KC_HTTP_MANAGEMENT_PORT=9000 (default)
-        - KC_HTTP_MANAGEMENT_RELATIVE_PATH=/ (default)
-        - KC_HTTPS_MANAGEMENT_CERTIFICATE_FILE=
-        - KC_HTTPS_MANAGEMENT_CERTIFICATE_KEY_FILE=
-        - KC_HTTPS_MANAGEMENT_CLIENT_AUTH=none (default), request, required
-        - KC_HTTPS_MANAGEMENT_KEY_STORE_FILE=
-        - KC_HTTPS_MANAGEMENT_KEY_STORE_PASSWORD=password (default)
+        #- KC_HTTP_MANAGEMENT_PORT=9000 (default)
+        #- KC_HTTP_MANAGEMENT_RELATIVE_PATH=/ (default)
+        #- KC_HTTPS_MANAGEMENT_CERTIFICATE_FILE=
+        #- KC_HTTPS_MANAGEMENT_CERTIFICATE_KEY_FILE=
+        #- KC_HTTPS_MANAGEMENT_CLIENT_AUTH=none (default), request, required
+        #- KC_HTTPS_MANAGEMENT_KEY_STORE_FILE=
+        #- KC_HTTPS_MANAGEMENT_KEY_STORE_PASSWORD=password (default)
         #METRICS ENVIRONMENT CONFIG
-        - KC_METRICS_ENABLED=true, false (default)
+        #- KC_METRICS_ENABLED=true, false (default)
         #PROXY ENVIRONMENT CONFIG
-        - KC_PROXY_HEADERS=forwarded, xforwarded
+        #- KC_PROXY_HEADERS=forwarded, xforwarded
         #VAULT ENVIRONMENT CONFIG
-        - KC_VAULT=file, keystore
-        - KC_VAULT_DIR=
-        - KC_VAULT_FILE=
-        - KC_VAULT_PASS=
-        - KC_VAULT_TYPE=PKCS12 (default)
+        #- KC_VAULT=file, keystore
+        #- KC_VAULT_DIR=
+        #- KC_VAULT_FILE=
+        #- KC_VAULT_PASS=
+        #- KC_VAULT_TYPE=PKCS12 (default)
         #LOGGING ENVIRONMENT CONFIG
-        - KC_LOG=console, file, syslog
-        - KC_LOG_CONSOLE_COLOR=true, false (default)
-        - KC_LOG_CONSOLE_FORMAT=%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n (default)
-        - KC_LOG_CONSOLE_OUTPUT=default (default), json
-        - KC_LOG_FILE=data/log/keycloak.log (default)
-        - KC_LOG_FILE_FORMAT=%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n (default)
-        - KC_LOG_FILE_OUTPUT=default (default), json
-        - KC_LOG_LEVEL=[info] (default)
-        - KC_LOG_SYSLOG_ENDPOINT=localhost:514 (default)
-        - KC_LOG_SYSLOG_FORMAT=%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n (default)
-        - KC_LOG_SYSLOG_OUTPUT=default (default), json
+        #- KC_LOG=console, file, syslog
+        #- KC_LOG_CONSOLE_COLOR=true, false (default)
+        #- KC_LOG_CONSOLE_FORMAT=%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n (default)
+        #- KC_LOG_CONSOLE_OUTPUT=default (default), json
+        #- KC_LOG_FILE=data/log/keycloak.log (default)
+        #- KC_LOG_FILE_FORMAT=%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n (default)
+        #- KC_LOG_FILE_OUTPUT=default (default), json
+        #- KC_LOG_LEVEL=[info] (default)
+        #- KC_LOG_SYSLOG_ENDPOINT=localhost:514 (default)
+        #- KC_LOG_SYSLOG_FORMAT=%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n (default)
+        #- KC_LOG_SYSLOG_OUTPUT=default (default), json
+        #- KC_LOG_SYSLOG_PROTOCOL=tcp (default), udp, ssl-tcp
+        #TRUSTSTORE ENVIRONMENT CONFIG
+        #- KC_TLS_HOSTNAME_VERIFIER=ANY, DEFAULT (default)
+        #- KC_TRUSTSTORE_PATHS=
+        #SECURITY ENVIRONMENT CONFIG
+        #- KC_FIPS_MODE=non-strict, strict
+        #EXPORT ENVIRONMENT CONFIG
+        #- KC_DIR=
+        #- KC_FILE=
+        #- KC_REALM=
+        #- KC_USERS=skip, realm_file, same_file, different_files (default)
+        #- KC_USERS_PER_FILE=50 (default)
+        #IMPORT ENVIRONMENT CONFIG
+        #- KC_DIR=
+        #- KC_FILE=
+        #- KC_OVERRIDE=true (default), false
         
