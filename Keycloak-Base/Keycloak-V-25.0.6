@@ -1,0 +1,43 @@
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+      environment:
+        #CACHE ENVIRONMENT CONFIG
+        - KC_CACHE=ispn (default), local
+        - KC_CACHE_CONFIG_FILE=
+        - KC_CACHE_EMBEDDED_MTLS_ENABLED=true, false (default)
+        - KC_CACHE_EMBEDDED_MTLS_KEY_STORE_FILE=
+        - KC_CACHE_EMBEDDED_MTLS_KEY_STORE_PASSWORD=
+        - KC_CACHE_EMBEDDED_MTLS_TRUST_STORE_FILE=
+        - KC_CACHE_EMBEDDED_MTLS_TRUST_STORE_PASSWORD=
+        - KC_CACHE_METRICS_HISTOGRAMS_ENABLED=true, false (default)
+        - KC_CACHE_REMOTE_HOST=
+        - KC_CACHE_REMOTE_PASSWORD=
+        - KC_CACHE_REMOTE_PORT=11222 (default)
+        - KC_CACHE_REMOTE_TLS_ENABLED=true (default), false
+        - KC_CACHE_REMOTE_USERNAME=
+        - KC_CACHE_STACK=
+        #CONFIG ENVIRONMENT CONFIG
+        - KC_CONFIG_KEYSTORE=
+        - KC_CONFIG_KEYSTORE_PASSWORD=
+        - KC_CONFIG_KEYSTORE_TYPE=PKCS12 (default)
+        #DATABASE ENVIRONMENT CONFIG
+        - KC_DB=dev-file (default), dev-mem, mariadb, mssql, mysql, oracle, postgres
+        - KC_DB_DRIVER=
+        - KC_DB_PASSWORD=
+        - KC_DB_POOL_INITIAL_SIZE=
+        - KC_DB_POOL_MAX_SIZE=100 (default)
+        - KC_DB_SCHEMA=
+        - KC_DB_URL=
+        - KC_DB_URL_DATABASE=
+        - KC_DB_URL_HOST=
+        - KC_DB_URL_PORT=
+        - KC_DB_URL_PROPERTIES=
+        - KC_DB_USERNAME=
+        #TRANSACTION ENVIRONMENT CONFIG
+        - KC_TRANSACTION_XA_ENABLED=true, false (default)
+        - KC_FEATURES=account-api[:v1], account3[:v1], admin-api[:v1], admin-fine-grained-authz[:v1], admin2[:v1], authorization[:v1], ciba[:v1], client-policies[:v1], client-secret-rotation[:v1], client-types[:v1], declarative-ui[:v1], device-flow[:v1], docker[:v1], dpop[:v1], dynamic-scopes[:v1], fips[:v1], hostname[:v1,v2], impersonation[:v1], js-adapter[:v1], kerberos[:v1], login2[:v1], multi-site[:v1], oid4vc-vci[:v1], organization[:v1], par[:v1], passkeys[:v1], persistent-user-sessions[:v1], preview, recovery-codes[:v1], scripts[:v1], step-up-authentication[:v1], token-exchange[:v1], transient-users[:v1], update-email[:v1], web-authn[:v1]
+        - KC_FEATURES_DISABLED=account-api, account3, admin-api, admin-fine-grained-authz, admin2, authorization, ciba, client-policies, client-secret-rotation, client-types, declarative-ui, device-flow, docker, dpop, dynamic-scopes, fips, impersonation, js-adapter, kerberos, login2, multi-site, oid4vc-vci, organization, par, passkeys, persistent-user-sessions, preview, recovery-codes, scripts, step-up-authentication, token-exchange, transient-users, update-email, web-authn
+        - KC_HOSTNAME=
+        - KC_HOSTNAME_ADMIN=
+        
