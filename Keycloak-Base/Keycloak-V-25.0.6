@@ -40,4 +40,60 @@ services:
         - KC_FEATURES_DISABLED=account-api, account3, admin-api, admin-fine-grained-authz, admin2, authorization, ciba, client-policies, client-secret-rotation, client-types, declarative-ui, device-flow, docker, dpop, dynamic-scopes, fips, impersonation, js-adapter, kerberos, login2, multi-site, oid4vc-vci, organization, par, passkeys, persistent-user-sessions, preview, recovery-codes, scripts, step-up-authentication, token-exchange, transient-users, update-email, web-authn
         - KC_HOSTNAME=
         - KC_HOSTNAME_ADMIN=
+        - KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true, false (default)
+        - KC_HOSTNAME_DEBUG=true, false (default)
+        - KC_HOSTNAME_STRICT=true (default), false
+        #HTTPS ENVIRONMENT CONFIG
+        - KC_HTTP_ENABLED=true, false (default)
+        - KC_HTTP_HOST=0.0.0.0 (default)
+        - KC_HTTP_MAX_QUEUED_REQUESTS=
+        - KC_HTTP_METRICS_HISTOGRAMS_ENABLED=true, false (default)
+        - KC_HTTP_METRICS_SLOS=
+        - KC_HTTP_POOL_MAX_THREADS=
+        - KC_HTTP_PORT=8080 (default)
+        - KC_HTTP_RELATIVE_PATH=/ (default)
+        - KC_HTTPS_CERTIFICATE_FILE=
+        - KC_HTTPS_CERTIFICATE_KEY_FILE=
+        - KC_HTTPS_CIPHER_SUITES=
+        - KC_HTTPS_CLIENT_AUTH=none (default), request, required
+        - KC_HTTPS_KEY_STORE_FILE=
+        - KC_HTTPS_KEY_STORE_PASSWORD=password (default)
+        - KC_HTTPS_KEY_STORE_TYPE=
+        - KC_HTTPS_PORT=8443 (default)
+        - KC_HTTPS_PROTOCOLS=[TLSv1.3,TLSv1.2] (default)
+        - KC_HTTPS_TRUST_STORE_FILE=
+        - KC_HTTPSTRUST_STORE_PASSWORD=
+        - KC_HTTPS_TRUST_STORE_TYPE=
+        #HEALTH ENVIRONMENT CONFIG
+        - KC_HEALTH_ENABLED=true, false (default)
+        #MANAGEMENT ENVIRONMENT CONFIG
+        - KC_HTTP_MANAGEMENT_PORT=9000 (default)
+        - KC_HTTP_MANAGEMENT_RELATIVE_PATH=/ (default)
+        - KC_HTTPS_MANAGEMENT_CERTIFICATE_FILE=
+        - KC_HTTPS_MANAGEMENT_CERTIFICATE_KEY_FILE=
+        - KC_HTTPS_MANAGEMENT_CLIENT_AUTH=none (default), request, required
+        - KC_HTTPS_MANAGEMENT_KEY_STORE_FILE=
+        - KC_HTTPS_MANAGEMENT_KEY_STORE_PASSWORD=password (default)
+        #METRICS ENVIRONMENT CONFIG
+        - KC_METRICS_ENABLED=true, false (default)
+        #PROXY ENVIRONMENT CONFIG
+        - KC_PROXY_HEADERS=forwarded, xforwarded
+        #VAULT ENVIRONMENT CONFIG
+        - KC_VAULT=file, keystore
+        - KC_VAULT_DIR=
+        - KC_VAULT_FILE=
+        - KC_VAULT_PASS=
+        - KC_VAULT_TYPE=PKCS12 (default)
+        #LOGGING ENVIRONMENT CONFIG
+        - KC_LOG=console, file, syslog
+        - KC_LOG_CONSOLE_COLOR=true, false (default)
+        - KC_LOG_CONSOLE_FORMAT=%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n (default)
+        - KC_LOG_CONSOLE_OUTPUT=default (default), json
+        - KC_LOG_FILE=data/log/keycloak.log (default)
+        - KC_LOG_FILE_FORMAT=%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n (default)
+        - KC_LOG_FILE_OUTPUT=default (default), json
+        - KC_LOG_LEVEL=[info] (default)
+        - KC_LOG_SYSLOG_ENDPOINT=localhost:514 (default)
+        - KC_LOG_SYSLOG_FORMAT=%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n (default)
+        - KC_LOG_SYSLOG_OUTPUT=default (default), json
         
