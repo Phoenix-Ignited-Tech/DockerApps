@@ -23,6 +23,8 @@ services:
       - ./logs/traefik:/var/log/traefik
     networks:
       - web
+    restart: always
+
   keycloak:
     image: quay.io/keycloak/keycloak:latest  # Pre-built Keycloak Docker image latest version
     environment:
@@ -59,6 +61,7 @@ services:
     depends_on:
       - db
     command: 'start'  # Other options include start-dev and start --optimized see docs
+    restart: always
 
   db:
     image: postgres
@@ -72,6 +75,7 @@ services:
       - db-data:/var/lib/postgresql/data
     networks:
      - web
+    restart: always
 volumes:
   db-data:
 networks:
