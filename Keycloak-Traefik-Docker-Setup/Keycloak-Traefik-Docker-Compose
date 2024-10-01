@@ -4,6 +4,7 @@ services:
     command:
       - "--api.insecure=false"  # Enables Traefik's dashboard (for testing)
       - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"  # Disable auto-discovery
       - "--entrypoints.web.address=:80"         # HTTP entry point
       - "--entrypoints.websecure.address=:443"  # HTTPS entry point
       - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
@@ -20,7 +21,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"  # For Docker provider
       - "./letsencrypt:/letsencrypt"  # Persist Let's Encrypt certificates
-      - ./logs/traefik:/var/log/traefik
+      - traefik-logs:/var/log/traefik
     networks:
       - web
     restart: always
@@ -55,7 +56,7 @@ services:
     volumes:
       - ./certs:/opt/keycloak/conf/
       - ./themes:/opt/keycloak/themes   #mounts an external directory for customizing themes
-      - ./logs/keycloak:/opt/keycloak/logs
+      - keycloak-logs:/opt/keycloak/logs
     ports:
       - "8443:8443"
       #- "8080:8080"
@@ -79,6 +80,8 @@ services:
     restart: always
 volumes:
   db-data:
+  traefik-logs:
+  keycloak-logs:
 networks:
   web:
     driver: bridge
