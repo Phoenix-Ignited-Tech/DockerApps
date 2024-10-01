@@ -20,6 +20,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"  # For Docker provider
       - "./letsencrypt:/letsencrypt"  # Persist Let's Encrypt certificates
+      - ./logs/traefik:/var/log/traefik
     networks:
       - web
   keycloak:
@@ -51,6 +52,7 @@ services:
     volumes:
       - ./certs:/opt/keycloak/conf/
       - ./themes:/opt/keycloak/themes   #mounts an external directory for customizing themes
+      - ./logs/keycloak:/opt/keycloak/logs
     ports:
       - "8443:8443"
       #- "8080:8080"
