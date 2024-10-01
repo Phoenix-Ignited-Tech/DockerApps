@@ -51,6 +51,7 @@ services:
       - "traefik.http.services.my-container.loadbalancer.server.port=8080"  # Route to port 8080
     networks:
       - web
+      -internal
     volumes:
       - ./certs:/opt/keycloak/conf/
       - ./themes:/opt/keycloak/themes   #mounts an external directory for customizing themes
@@ -74,10 +75,12 @@ services:
       - ./postgresconf/postgresql.conf:/etc/postgresql/postgresql.conf
       - db-data:/var/lib/postgresql/data
     networks:
-     - web
+     - internal
     restart: always
 volumes:
   db-data:
 networks:
   web:
-    external: true  # Be sure to create external network web
+    driver: bridge
+  internal:
+    driver: bridge
