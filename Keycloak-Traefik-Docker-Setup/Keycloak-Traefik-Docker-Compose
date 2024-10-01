@@ -41,8 +41,9 @@ services:
       - KC_HTTP_ENABLED=true
       - KC_HEALTH_ENABLED=false   # Enable health as needed see docs
       - KC_PROXY_HEADERS=xforwarded
-      #- KC_LOG_LEVEL=DEBUG   # Uncomment for debugging
-      - KC_LOG=console   # See docs on logs
+      - KC_LOG=console,file   # See docs on logs
+      - KC_LOG_LEVEL=WARN  # For debugging set to DEBUG see docs on logs
+      - KC_LOG_FILE=/opt/keycloak/logs/keycloak.log
       - KC_HOSTNAME_STRICT=true
     labels:
       - "traefik.enable=true"
