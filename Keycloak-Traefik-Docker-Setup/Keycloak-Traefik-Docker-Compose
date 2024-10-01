@@ -51,7 +51,7 @@ services:
       - "traefik.http.services.my-container.loadbalancer.server.port=8080"  # Route to port 8080
     networks:
       - web
-      -internal
+      - internal
     volumes:
       - ./certs:/opt/keycloak/conf/
       - ./themes:/opt/keycloak/themes   #mounts an external directory for customizing themes
