@@ -42,7 +42,7 @@ services:
       - KC_HTTP_PORT=8080
       - KC_HTTP_ENABLED=true
       - KC_HEALTH_ENABLED=false   # Enable health as needed see docs
-      - KC_PROXY_HEADERS=xforwarded
+      #- KC_PROXY_HEADERS=xforwarded, forwarded #CAUTION see docs on forwarding
       - KC_LOG=console,file   # See docs on logs
       - KC_LOG_LEVEL=WARN  # For debugging set to DEBUG see docs on logs
       - KC_LOG_FILE=/opt/keycloak/logs/keycloak.log
@@ -57,12 +57,12 @@ services:
       - web
       - internal
     volumes:
-      - ./certs:/opt/keycloak/conf/
-      - ./themes:/opt/keycloak/themes   #mounts an external directory for customizing themes
+      #- ./certs:/opt/keycloak/conf/ #use if you are not having traefik handle ssl
+      - ./themes:/opt/keycloak/themes   #mounts an external directory for customizing themes 
       - keycloak-logs:/opt/keycloak/logs
     ports:
       - "8443:8443"
-      #- "8080:8080"
+      #- "8080:8080" #for use when using keycloak to handle ssl
     depends_on:
       - db
     command: 'start'  # Other options include start-dev and start --optimized see docs
