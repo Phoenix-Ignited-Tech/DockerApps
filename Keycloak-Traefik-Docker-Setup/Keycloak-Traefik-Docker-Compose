@@ -4,6 +4,7 @@ services:
     command:
       - "--api.insecure=false"  # Enables Traefik's dashboard (for testing)
       - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"  # Disable auto-discovery
       - "--entrypoints.web.address=:80"         # HTTP entry point
       - "--entrypoints.websecure.address=:443"  # HTTPS entry point
       - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
@@ -11,6 +12,8 @@ services:
       - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.myresolver.acme.email=me@example.tech"  # Email for Let's Encrypt
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--log.filePath=/var/log/traefik/traefik.log"  # Log file within mounted volume
+      - "--log.level=WARN"                             # Set log level to WARN
     labels:
       - "traefik.http.middlewares.middleware12.headers.sslforcehost=true"
       - "traefik.http.middlewares.middleware12.headers.sslhost=auth.example.tech"
@@ -20,25 +23,29 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"  # For Docker provider
       - "./letsencrypt:/letsencrypt"  # Persist Let's Encrypt certificates
+      - traefik-logs:/var/log/traefik
     networks:
       - web
+    restart: always
+
   keycloak:
     image: quay.io/keycloak/keycloak:latest  # Pre-built Keycloak Docker image latest version
     environment:
       - KC_DB=postgres  #Uses Postgres for DB
       - KC_DB_URL=jdbc:postgresql://db:5432/keycloak
-      - KC_DB_USERNAME=keycloak
+      - KC_DB_USERNAME=${KC_DB_USERNAME}
       - KC_FEATURES=hostname:v2    # Add other features as necessary see docs
-      - KC_DB_PASSWORD=secretpassword
+      - KC_DB_PASSWORD=${KC_DB_PASSWORD}
       - KC_HOSTNAME=auth.example.tech
-      - KEYCLOAK_ADMIN=username
-      - KEYCLOAK_ADMIN_PASSWORD=password
+      - KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN}
+      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}
       - KC_HTTP_PORT=8080
       - KC_HTTP_ENABLED=true
       - KC_HEALTH_ENABLED=false   # Enable health as needed see docs
-      - KC_PROXY_HEADERS=xforwarded
-      #- KC_LOG_LEVEL=DEBUG   # Uncomment for debugging
-      - KC_LOG=console   # See docs on logs
+      #- KC_PROXY_HEADERS=xforwarded, forwarded #CAUTION see docs on forwarding
+      - KC_LOG=console,file   # See docs on logs
+      - KC_LOG_LEVEL=WARN  # For debugging set to DEBUG see docs on logs
+      - KC_LOG_FILE=/opt/keycloak/logs/keycloak.log
       - KC_HOSTNAME_STRICT=true
     labels:
       - "traefik.enable=true"
@@ -48,30 +55,38 @@ services:
       - "traefik.http.services.my-container.loadbalancer.server.port=8080"  # Route to port 8080
     networks:
       - web
+      - internal
     volumes:
-      - ./certs:/opt/keycloak/conf/
-      - ./themes:/opt/keycloak/themes   #mounts an external directory for customizing themes
+      #- ./certs:/opt/keycloak/conf/ #use if you are not having traefik handle ssl
+      - ./themes:/opt/keycloak/themes   #mounts an external directory for customizing themes 
+      - keycloak-logs:/opt/keycloak/logs
     ports:
       - "8443:8443"
-      #- "8080:8080"
+      #- "8080:8080" #for use when using keycloak to handle ssl
     depends_on:
       - db
     command: 'start'  # Other options include start-dev and start --optimized see docs
+    restart: always
 
   db:
     image: postgres
     environment:
       - POSTGRES_DB=keycloak
-      - POSTGRES_USER=keycloak
-      - POSTGRES_PASSWORD=secretpassword
+      - POSTGRES_USER=${KC_DB_USERNAME}
+      - POSTGRES_PASSWORD=${KC_DB_PASSWORD}
     volumes:
       - ./postgresconf/pg_hba.conf:/etc/postgresql/pg_hba.conf
       - ./postgresconf/postgresql.conf:/etc/postgresql/postgresql.conf
       - db-data:/var/lib/postgresql/data
     networks:
-     - web
+     - internal
+    restart: always
 volumes:
   db-data:
+  traefik-logs:
+  keycloak-logs:
 networks:
   web:
-    external: true  # Be sure to create external network web
+    driver: bridge
+  internal:
+    driver: bridge
